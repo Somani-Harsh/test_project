@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+	<table>
+		<tr>
+			<th>Rating</th>
+			<th>Review</th>
+			<th>Cost for two</th>
+			<th>Name</th>
+		</tr>
+		
+		{% for item in a %}
+		<tr>
+			{% for value in item.values %}
+				{% for key,val in value.items %}
+				{% if 'rating' in key %}
+				<td>
+					{% for k,v in val.items %}
+					{{ k }}<br> {{ v }} <br><br>
+					{% endfor %}
+				</td>
+				{% elif "review" in key %}
+				<td>
+					{% for k,v in val.items %}
+					{{ k }} <br> {{ v }} <br><br>
+					{% endfor %}
+				</td>
+				{% else %}
+				<td>
+					{{ val }}
+				</td>
+				{% endif %}
+				{% endfor %}
+			{% endfor %}
+		</tr>
+		{% endfor %}
+		
+	</table>
+</body>
+</html>
