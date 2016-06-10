@@ -63,8 +63,29 @@ WSGI_APPLICATION = 'test_project.wsgi.application'
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
-import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
+
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd56u1h2034l6ht',
+        'USER': 'wpdrxvdzyyxann',
+        'PASSWORD': 'FlAgFQ2sd64bUfqkeomj2ddiqr',
+        'HOST': 'ec2-54-83-202-115.compute-1.amazonaws.com',
+        'PORT': '5432',
+    }
+}
+Remember that these files import from the settings/base.py file, in which we defined the get_env_variable function as:
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
