@@ -4,10 +4,10 @@ from django.http import HttpResponse
 from bs4 import BeautifulSoup
 from pandas.io.json import json_normalize
 
-def get_reviews_details(request):
+def get_reviews_details(url):
     with requests.Session() as session:
         session.headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36"}
-        r = session.get("https://www.zomato.com/ncr/chilis-sector-18-noida/reviews")
+        r = session.get(url + "/reviews")
         soup = BeautifulSoup(r.content, "html.parser")
         itemid = soup.body["itemid"]
 
@@ -23,8 +23,6 @@ def get_reviews_details(request):
         soup = BeautifulSoup(reviews, "html.parser")
 
         like_data = soup.select("div.js-activity-like-count")
-
-
         comment = {}
         count = 0
         for item in like_data:
@@ -50,8 +48,6 @@ def get_reviews_details(request):
 
     di = {}
     for a in comment.values():
-        print a
-
         if di.has_key(a['rating']):
             di[a['rating']]+= a['like']
         else:
